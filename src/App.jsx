@@ -4,10 +4,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
-    <>
+    <BrowserRouter basename="/fitness-management-system-frontend">
       <RouterProvider router={router} />
       <ToastContainer />
-    </>
+    </BrowserRouter>
   );
 }
 export default App;
