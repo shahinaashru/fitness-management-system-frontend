@@ -219,6 +219,6 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/fitness-club/",
+    basename: "/fitness-management-system-frontend/",
   }
 );
