@@ -35,185 +35,190 @@ import SessionDetails from "../pages/users/SessionDetails";
 import SelectedProgram from "../pages/users/SelectedProgram";
 import MyProgram from "../pages/users/MyProgram";
 import TrainerOrdersTable from "../pages/trainers/TrainerOrdersTable";
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
+    },
+    {
+      path: "/auth",
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: "admin",
+          element: <AdminLayout />,
+          children: [
+            {
+              path: "dashboard",
+              element: <Dashboard />,
+            },
+            {
+              path: "user",
+              element: <User />,
+            },
+            {
+              path: "create-user",
+              element: <CreateUser />,
+            },
+            {
+              path: "create-trainer",
+              element: <CreateTrainer />,
+            },
+            {
+              path: "trainer",
+              element: <Trainers />,
+            },
+            {
+              path: "fitness-programs",
+              element: <FitnessPrograms />,
+            },
+            {
+              path: "./daily-status-card",
+              element: <DailyStatusCard />,
+            },
+            {
+              path: "users-daily-status",
+              element: <UsersDailyStatus />,
+            },
+            {
+              path: "create-fitness-program",
+              element: <CreateFitnessProgram />,
+            },
+          ],
+        },
+        {
+          path: "user",
+          element: <Layout />,
+          children: [
+            {
+              path: "dashboard",
+              element: <UserDashboard />,
+            },
+            {
+              path: "profile",
+              element: <Profile />,
+            },
+            {
+              path: "create-profile",
+              element: <CreateProfile />,
+            },
+            {
+              path: "trainer",
+              element: <AssignedTrainers />,
+            },
+            {
+              path: "daily-status-card",
+              element: <DailyStatusCard />,
+            },
+            {
+              path: "daily-activity",
+              element: <DailyActivity />,
+            },
+            {
+              path: "fitness-programs",
+              element: <FitnessPrograms />,
+            },
+            {
+              path: "payment/success",
+              element: <OrderSuccess />,
+            },
+            {
+              path: "session/success",
+              element: <SesionSuccess />,
+            },
+            {
+              path: "payment/failed",
+              element: <OrderFailed />,
+            },
+            {
+              path: "order-details",
+              element: <OrderDetails />,
+            },
+            {
+              path: "book-session",
+              element: <BookPersonalSession />,
+            },
+            {
+              path: "my-booked-sessions",
+              element: <MyBookedSessions />,
+            },
+            {
+              path: "session-details/:id",
+              element: <SessionDetails />,
+            },
+            {
+              path: "selected-program/:id",
+              element: <SelectedProgram />,
+            },
+            {
+              path: "my-programs",
+              element: <MyProgram />,
+            },
+          ],
+        },
+        {
+          path: "trainer",
+          element: <Layout />,
+          children: [
+            {
+              path: "dashboard",
+              element: <TrainerDashboard />,
+            },
+            {
+              path: "profile",
+              element: <TrainerProfile />,
+            },
+            {
+              path: "fitness-programs",
+              element: <FitnessPrograms />,
+            },
+            {
+              path: "create-profile",
+              element: <CreaterainerProfile />,
+            },
+            {
+              path: "add-weeklyplan",
+              element: <AddWeeklyPlan />,
+            },
+            {
+              path: "users-daily-status",
+              element: <UsersDailyStatus />,
+            },
+            {
+              path: "user",
+              element: <Clients />,
+            },
+            {
+              path: "create-fitness-program",
+              element: <CreateFitnessProgram />,
+            },
+            {
+              path: "weekly-activity-plans",
+              element: <WeeklyActivityPlans />,
+            },
+            {
+              path: "trainer-orders-details",
+              element: <TrainerOrdersTable />,
+            },
+            {
+              path: "session-request",
+              element: <TrainerSessionPage />,
+            },
+          ],
+        },
+        {
+          path: "*",
+          element: <div>404 - Page Not Found</div>,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/auth",
-    element: <PrivateRoute />,
-    children: [
-      {
-        path: "admin",
-        element: <AdminLayout />,
-        children: [
-          {
-            path: "dashboard",
-            element: <Dashboard />,
-          },
-          {
-            path: "user",
-            element: <User />,
-          },
-          {
-            path: "create-user",
-            element: <CreateUser />,
-          },
-          {
-            path: "create-trainer",
-            element: <CreateTrainer />,
-          },
-          {
-            path: "trainer",
-            element: <Trainers />,
-          },
-          {
-            path: "fitness-programs",
-            element: <FitnessPrograms />,
-          },
-          {
-            path: "./daily-status-card",
-            element: <DailyStatusCard />,
-          },
-          {
-            path: "users-daily-status",
-            element: <UsersDailyStatus />,
-          },
-          {
-            path: "create-fitness-program",
-            element: <CreateFitnessProgram />,
-          },
-        ],
-      },
-      {
-        path: "user",
-        element: <Layout />,
-        children: [
-          {
-            path: "dashboard",
-            element: <UserDashboard />,
-          },
-          {
-            path: "profile",
-            element: <Profile />,
-          },
-          {
-            path: "create-profile",
-            element: <CreateProfile />,
-          },
-          {
-            path: "trainer",
-            element: <AssignedTrainers />,
-          },
-          {
-            path: "daily-status-card",
-            element: <DailyStatusCard />,
-          },
-          {
-            path: "daily-activity",
-            element: <DailyActivity />,
-          },
-          {
-            path: "fitness-programs",
-            element: <FitnessPrograms />,
-          },
-          {
-            path: "payment/success",
-            element: <OrderSuccess />,
-          },
-          {
-            path: "session/success",
-            element: <SesionSuccess />,
-          },
-          {
-            path: "payment/failed",
-            element: <OrderFailed />,
-          },
-          {
-            path: "order-details",
-            element: <OrderDetails />,
-          },
-          {
-            path: "book-session",
-            element: <BookPersonalSession />,
-          },
-          {
-            path: "my-booked-sessions",
-            element: <MyBookedSessions />,
-          },
-          {
-            path: "session-details/:id",
-            element: <SessionDetails />,
-          },
-          {
-            path: "selected-program/:id",
-            element: <SelectedProgram />,
-          },
-          {
-            path: "my-programs",
-            element: <MyProgram />,
-          },
-        ],
-      },
-      {
-        path: "trainer",
-        element: <Layout />,
-        children: [
-          {
-            path: "dashboard",
-            element: <TrainerDashboard />,
-          },
-          {
-            path: "profile",
-            element: <TrainerProfile />,
-          },
-          {
-            path: "fitness-programs",
-            element: <FitnessPrograms />,
-          },
-          {
-            path: "create-profile",
-            element: <CreaterainerProfile />,
-          },
-          {
-            path: "add-weeklyplan",
-            element: <AddWeeklyPlan />,
-          },
-          {
-            path: "users-daily-status",
-            element: <UsersDailyStatus />,
-          },
-          {
-            path: "user",
-            element: <Clients />,
-          },
-          {
-            path: "create-fitness-program",
-            element: <CreateFitnessProgram />,
-          },
-          {
-            path: "weekly-activity-plans",
-            element: <WeeklyActivityPlans />,
-          },
-          {
-            path: "trainer-orders-details",
-            element: <TrainerOrdersTable />,
-          },
-          {
-            path: "session-request",
-            element: <TrainerSessionPage />,
-          },
-        ],
-      },
-      {
-        path: "*",
-        element: <div>404 - Page Not Found</div>,
-      },
-    ],
-  },
-]);
+    basename: "/fitness-management-system-frontend",
+  }
+);
