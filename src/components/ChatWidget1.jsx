@@ -81,7 +81,7 @@ export default function ChatWidget1() {
       message,
       timestamp: new Date(),
     };
-    const socket = io("http://localhost:3000", { transports: ["websocket"] });
+    const socket = io("socket_url", { transports: ["websocket"] });
     socket.emit("send_message", msgData);
 
     setChat((prev) => [...prev, msgData]);
