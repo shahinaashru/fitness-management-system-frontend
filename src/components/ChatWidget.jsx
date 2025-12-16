@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { closeChat } from "../redux/features/chatSlice";
 import { getChatUsersUnderTrainer } from "../services/userServices";
 import { getTrainerForChat } from "../services/trainerServices";
-const socket = io("http://localhost:3000", { transports: ["websocket"] });
+const socket_url = import.meta.env.VITE_SOCKET_URL;
+const socket = io(socket_url, { transports: ["websocket"] });
 export default function ChatWidget() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.chat.isOpen);
