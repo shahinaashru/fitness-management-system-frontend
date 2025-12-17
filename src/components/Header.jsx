@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getProfile } from "../services/userServices";
+import { getProfile as getTrainerData } from "../services/trainerServices";
 import { useNavigate } from "react-router-dom";
 import MyGymLogo from "../assets/image/logo.png";
 import {
@@ -10,7 +11,7 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { BellIcon } from "@heroicons/react/24/outline";
 import { logout } from "../redux/features/userSlice";
 import { persistor } from "../redux/store";
 import { doLogout } from "../services/userServices";
@@ -31,7 +32,6 @@ export default function Header() {
     try {
       getProfile()
         .then((res) => {
-          console.log(res.data);
           setUserData(res.data.user);
         })
         .catch((error) => {
@@ -42,8 +42,27 @@ export default function Header() {
       setError("Failed to load dashboard data");
     }
   };
+  const fetchTrainerData = async () => {
+    try {
+      getTrainerData()
+        .then((res) => {
+          setUserData(res.data.trainer);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (err) {
+      console.error("Error fetching dashboard data:", err);
+      setError("Failed to load dashboard data");
+    }
+  };
   useEffect(() => {
-    fetchUserData();
+    if (user1.role == "user") {
+      fetchUserData();
+    }
+    if (user1.role == "trainer") {
+      fetchTrainerData();
+    }
   }, []);
   const handleLogout = async () => {
     try {
@@ -115,7 +134,13 @@ export default function Header() {
                 </button>
                 <div className="ml-2 flex items-center md:ml-2">
                   <h1 className="text-white float-right">
-                    Welcome, {userData ? userData.fullname : "Guest"}!
+                    Welcome,{" "}
+                    {userData?.fullname
+                      ? userData.fullname
+                      : user1
+                      ? user1.username
+                      : "Guest"}
+                    !
                   </h1>
                 </div>
                 {/* Profile dropdown */}
