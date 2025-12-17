@@ -1,6 +1,7 @@
 import Layout from "../layout/Layout";
 import Login from "../pages/shared/Login";
-import { createBrowserRouter } from "react-router-dom";
+// import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import SignUp from "../pages/shared/SignUp";
 import Dashboard from "../pages/admin/Dashboard";
 import UserDashboard from "../pages/users/Dashboard";
@@ -35,7 +36,7 @@ import SessionDetails from "../pages/users/SessionDetails";
 import SelectedProgram from "../pages/users/SelectedProgram";
 import MyProgram from "../pages/users/MyProgram";
 import TrainerOrdersTable from "../pages/trainers/TrainerOrdersTable";
-export const router = createBrowserRouter(
+export const router = createHashRouter(
   [
     {
       path: "/",
