@@ -217,8 +217,8 @@ export const router = createBrowserRouter(
         },
       ],
     },
-  ],
-  {
-    basename: "/fitness-management-system-frontend/",
-  }
+  ]
+  // {
+  //   basename: "/fitness-management-system-frontend/",
+  // }
 );
