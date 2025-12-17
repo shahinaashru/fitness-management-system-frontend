@@ -82,7 +82,7 @@ export default function ChatWidget() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v1/chat/${userId}/${trainerId}`
+        `${socket_url}/api/v1/chat/${userId}/${trainerId}`
       );
       const data = await response.json();
       setChat(data.messages || []); // Update the chat history
@@ -154,7 +154,7 @@ export default function ChatWidget() {
         timestamp: new Date(),
       };
     }
-    const socket = io("http://localhost:3000", { transports: ["websocket"] });
+    const socket = io(socket_url, { transports: ["websocket"] });
     socket.emit("send_message", msgData); // Send message to server
 
     setChat((prev) => [...prev, msgData]); // Update local chat immediately
