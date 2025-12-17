@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getProfile } from "../services/userServices";
 import { useNavigate } from "react-router-dom";
 import MyGymLogo from "../assets/image/logo.png";
 import {
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Menu,
   MenuButton,
   MenuItem,
@@ -15,14 +14,6 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { logout } from "../redux/features/userSlice";
 import { persistor } from "../redux/store";
 import { doLogout } from "../services/userServices";
-
-const userDefault = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
-
 // const navigation = [
 //   { name: "Dashboard", href: "#", current: true },
 //   { name: "Team", href: "#", current: false },
@@ -33,9 +24,27 @@ const userDefault = {
 
 export default function Header() {
   const user1 = useSelector((state) => state.user.user);
+  const [userData, setUserData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const fetchUserData = async () => {
+    try {
+      getProfile()
+        .then((res) => {
+          console.log(res.data);
+          setUserData(res.data.user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (err) {
+      console.error("Error fetching dashboard data:", err);
+      setError("Failed to load dashboard data");
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
   const handleLogout = async () => {
     try {
       console.log(user1);
@@ -106,7 +115,7 @@ export default function Header() {
                 </button>
                 <div className="ml-2 flex items-center md:ml-2">
                   <h1 className="text-white float-right">
-                    Welcome, {user1 ? user1.username : "Guest"}!
+                    Welcome, {userData ? userData.fullname : "Guest"}!
                   </h1>
                 </div>
                 {/* Profile dropdown */}
@@ -116,7 +125,7 @@ export default function Header() {
                     <span className="sr-only">Open user menu</span>
                     <img
                       alt=""
-                      src={userDefault.imageUrl}
+                      src={userData.image}
                       className="size-8 rounded-full outline -outline-offset-1 outline-white/10"
                     />
                   </MenuButton>
