@@ -191,7 +191,7 @@ export default function CreateProfile() {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-orange-500 border-gray-400 hover:bg-blue-700 text-white p-3 rounded-lg transition"
+          className="w-full bg-orange-500 border-gray-400 hover:bg-orange-300 text-white p-3 rounded-lg transition"
         >
           Save Profile
         </button>

@@ -36,6 +36,8 @@ import SessionDetails from "../pages/users/SessionDetails";
 import SelectedProgram from "../pages/users/SelectedProgram";
 import MyProgram from "../pages/users/MyProgram";
 import TrainerOrdersTable from "../pages/trainers/TrainerOrdersTable";
+import EditProfile from "../pages/users/EditProfile";
+import EditTrainerProfile from "../pages/trainers/EditTrainerProfile";
 export const router = createHashRouter(
   [
     {
@@ -107,6 +109,10 @@ export const router = createHashRouter(
             {
               path: "create-profile",
               element: <CreateProfile />,
+            },
+            {
+              path: "edit-profile",
+              element: <EditProfile />,
             },
             {
               path: "trainer",
@@ -181,6 +187,10 @@ export const router = createHashRouter(
             {
               path: "create-profile",
               element: <CreaterainerProfile />,
+            },
+            {
+              path: "edit-profile",
+              element: <EditTrainerProfile />,
             },
             {
               path: "add-weeklyplan",

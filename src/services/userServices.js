@@ -38,6 +38,14 @@ export const createProfile = (data) => {
     },
   });
 };
+export const updateProfile = (data, id) => {
+  let url = `/user/${id}`;
+  return axiosInstance.put(url, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 export const getProfile = () => {
   return axiosInstance.get("/user");
 };

@@ -10,6 +10,14 @@ export const createProfile = (data) => {
     },
   });
 };
+export const updateProfile = (data, id) => {
+  let url = `/trainer/${id}`;
+  return axiosInstance.put(url, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 export const addWeeklyPlan = (data) => {
   console.log(data);
   let url = "/activity/add-weeklyplan";

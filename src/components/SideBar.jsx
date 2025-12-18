@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { openChat } from "../redux/features/chatSlice";
 import {
+  PencilSquareIcon,
   HomeIcon,
   UserIcon,
   FolderIcon,
@@ -44,21 +45,13 @@ export default function SideBar() {
       href: "./dashboard",
       roles: ["user", "admin", "trainer"],
     },
-    { name: "Profile", icon: UserIcon, href: "./profile", roles: ["user"] },
-    { name: "Profile", icon: UserIcon, href: "./profile", roles: ["trainer"] },
     {
-      name: "Create Profile",
-      icon: UserPlusIcon,
-      href: "./create-profile",
-      roles: ["trainer"],
+      name: "Profile",
+      icon: UserIcon,
+      href: "./profile",
+      roles: ["user", "trainer"],
     },
     { name: "My Clients", icon: UsersIcon, href: "./user", roles: ["trainer"] },
-    {
-      name: "CreateProfile",
-      icon: UserPlusIcon,
-      href: "./create-profile",
-      roles: ["user"],
-    },
     {
       name: "Users Activity Status",
       icon: BoltIcon,
