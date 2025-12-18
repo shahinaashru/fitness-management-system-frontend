@@ -150,7 +150,7 @@ export default function Header() {
                     <span className="sr-only">Open user menu</span>
                     <img
                       alt=""
-                      src={userData.image}
+                      src={userData?.image}
                       className="size-8 rounded-full outline -outline-offset-1 outline-white/10"
                     />
                   </MenuButton>
