@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { doLogin } from "../../services/userServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { getProfile } from "../../services/userServices";
+import { getProfile as getTrainerData } from "../../services/trainerServices";
 export default function Login() {
+  const [userData, setUserData] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const fetchUserData = async () => {
+    const res = await getProfile();
+    return res?.data?.user || null;
+  };
+
+  const fetchTrainerData = async () => {
+    const res = await getTrainerData();
+    return res?.data?.trainer || null;
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,48 +31,55 @@ export default function Login() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      toast.error("All fields are required!", {
-        position: "top-center",
-      });
+      toast.error("All fields are required!", { position: "top-center" });
       return;
     }
 
-    doLogin(formData)
-      .then((res) => {
-        console.log(res);
-        const data = res.data;
-        const loggedInUser = data.user;
-        dispatch(setUser(loggedInUser));
+    try {
+      const res = await doLogin(formData);
+      const data = res.data;
+      const loggedInUser = data.user;
 
-        toast.success(data.message || "Login successful!", {
+      dispatch(setUser(loggedInUser));
+
+      toast.success(data.message || "Login successful!", {
+        position: "top-center",
+      });
+      if (loggedInUser.role === "user") {
+        const profile = await fetchUserData();
+        setUserData(profile);
+        navigate(
+          profile ? "/auth/user/dashboard" : "/auth/user/create-profile"
+        );
+      } else if (loggedInUser.role === "trainer") {
+        const trainerProfile = await fetchTrainerData();
+        setUserData(trainerProfile);
+        navigate(
+          trainerProfile
+            ? "/auth/trainer/dashboard"
+            : "/auth/trainer/create-profile"
+        );
+      } else {
+        navigate("/auth/admin/dashboard");
+      }
+    } catch (err) {
+      if (err.response) {
+        toast.error(
+          err.response.data.error ||
+            err.response.data.message ||
+            "Something went wrong!",
+          { position: "top-center" }
+        );
+      } else {
+        toast.error("Network error. Please try again.", {
           position: "top-center",
         });
-        if (data.user.role == "user") {
-          navigate("/auth/user/dashboard");
-        } else if (data.user.role == "trainer") {
-          navigate("/auth/trainer/dashboard");
-        } else {
-          navigate("/auth/admin/dashboard");
-        }
-      })
-      .catch((err) => {
-        if (err.response) {
-          toast.error(
-            err.response.data.error ||
-              err.response.data.message ||
-              "Something went wrong!",
-            { position: "top-center" }
-          );
-        } else {
-          toast.error("Network error. Please try again.", {
-            position: "top-center",
-          });
-        }
-      });
+      }
+    }
   };
 
   return (
