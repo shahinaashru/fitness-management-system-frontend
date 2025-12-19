@@ -75,7 +75,7 @@ const WeeklyActivityPlans = () => {
     setFilters({ ...filters, day: e.target.value });
 
   return (
-    <div className="bg-white rounded-xl shadow-lg m-10 p-10 h-screen">
+    <div className="bg-white rounded-xl shadow-lg m-10 p-10">
       <h1 className="text-xl font-semibold text-gray-800 mb-4">
         Weekly Fitness Plan
       </h1>

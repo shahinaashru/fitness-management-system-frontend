@@ -23,7 +23,7 @@ const DailyActivity = () => {
   const [selectedDay, setSelectedDay] = useState(defaultDay);
   const [weeklyPlan, setWeeklyPlan] = useState([]);
   const [dayPlan, setDayPlan] = useState(null);
-  const [notes, setNotes] = useState("");
+  const [suggestion, setSuggestion] = useState("");
   const [loading, setLoading] = useState(true);
   const [workoutStatus, setWorkoutStatus] = useState("pending");
   const [dietStatus, setDietStatus] = useState("pending");
@@ -66,6 +66,7 @@ const DailyActivity = () => {
       dietPlanStatus: dietStatus,
       workoutStatus: workoutStatus,
       programId: programId,
+      suggestion: suggestion,
     };
     addDailyActivity(payload)
       .then((res) => {
@@ -222,8 +223,8 @@ const DailyActivity = () => {
         <div className="mb-6">
           <h3 className="font-semibold mb-2">Notes / Suggestions</h3>
           <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
+            value={suggestion}
+            onChange={(e) => setSuggestion(e.target.value)}
             className="w-full border border-gray-400 rounded-md px-3 py-2"
             rows={4}
             placeholder="Enter feedback..."

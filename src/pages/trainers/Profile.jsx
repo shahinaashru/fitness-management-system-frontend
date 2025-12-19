@@ -41,7 +41,7 @@ export default function Profile() {
   }
   if (!profile) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center">
         <button
           className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-full shadow hover:bg-blue-600 transition"
           onClick={() => navigate("/auth/user/create-profile")}
@@ -56,7 +56,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
       <div className="bg-white rounded-2xl shadow-md w-full max-w-6xl p-8 flex flex-col md:flex-row gap-8">
         <div className="flex flex-col items-center md:items-center md:w-1/3">
           {/* <h3 className="text-xl font-semibold text-gray-800 mb-4">

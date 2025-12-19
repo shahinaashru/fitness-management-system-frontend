@@ -19,12 +19,13 @@ const UsersDailyStatus = () => {
         position: "top-center",
       });
     } catch (err) {
-      toast.error(
-        err.response.data.error ||
-          err.response.data.message ||
-          "Something went wrong!",
-        { position: "top-center" }
-      );
+      // toast.error(
+      //   err.response.data.error ||
+      //     err.response.data.message ||
+      //     "Something went wrong!",
+      //   { position: "top-center" }
+      // );
+      console.log(err);
       setActivityData([]);
     } finally {
       setLoading(false);
